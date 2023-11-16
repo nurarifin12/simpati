@@ -66,4 +66,3 @@ if($action == "update_user"){
 }
 
 ob_end_flush();
-?>

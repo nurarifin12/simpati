@@ -59,6 +59,9 @@ while ($row = $answers->fetch_assoc()) {
                     <div class="px-3">
                         <p class="fs-5">Total User Mengisi : <?= $taken; ?></p>
                     </div>
+                    <div class="px-3">
+                        <p class="fs-5">Data pada tahun : </p>
+                    </div>
                     <div class="small-box">
                         <div class="inner">
                             <canvas id="grafik_stats"></canvas>
@@ -178,6 +181,9 @@ while ($row = $answers->fetch_assoc()) {
                     <div class="px-3">
                         <p class="fs-5">Total User Mengisi : <?= $taken; ?></p>
                     </div>
+                    <div class="px-3">
+                        <p class="fs-5">Data pada tahun : <?= $_GET['thn'] ?></p>
+                    </div>
                     <div class="">
                         <h4 class="text-center fw-bold">TIDAK ADA DATA</h4>
                     </div>
@@ -233,7 +239,6 @@ if (isset($_GET['thn'])) {
 } else {
     $question = $conn->query("SELECT * FROM questions WHERE survey_id = $id ORDER BY abs(order_by) ASC, abs(id) ASC");
 }
-
 
 while ($row = $question->fetch_assoc()) {
     if ($row['type'] != 'textfield_s') {
@@ -306,7 +311,7 @@ if ($totalJawaban != 0) {
         // Get the canvas element
         const grafik_chart = document.getElementById('grafik_stats').getContext('2d');
         const doughnut_chart = document.getElementById('doughnut_stats').getContext('2d');
-        const color = ['#16FF00', '#E84545'];
+        const color = ['#16FF00', '#E84545', ];
 
         const value_bar = <?php echo json_encode($hasilYaNo); ?>;
         // Create a new chart using Chart.js

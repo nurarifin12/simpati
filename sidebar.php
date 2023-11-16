@@ -2,7 +2,7 @@
 
 <aside class="main-sidebar bg-white elevation-4">
     <div class="dropdown mx-3">
-        <a href="javascript:void(0)" class="brand-link text-dark" data-toggle="dropdown" aria-expanded="true">
+        <a href="" class="brand-link text-dark" data-toggle="dropdown" aria-expanded="true">
             <i class="nav-icon fa fa-laugh-wink fa-lg"></i>
             <span class="brand-text text-dark font-weight-bold">SIMPATI</span>
 
@@ -14,20 +14,20 @@
             <ul class="nav nav-sidebar flex-column nav-flat" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item dropdown">
                     <a href="./" class="nav-link nav-home text-dark">
-                        <!-- <i class="nav-icon fas fa-tachometer-alt"></i> -->
                         <span class="nav-icon material-symbols-outlined">
                             dashboard
                         </span>
-
                         <p>
                             Dashboard
                         </p>
                     </a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a href="./" class="nav-link nav-home text-dark">
-
-                        <!-- <i class="nav-icon fas fa-user"></i> -->
+                    <?php
+                    $sql = $conn->query("SELECT * FROM users WHERE id");
+                    $row = $sql->fetch_array();
+                    ?>
+                    <a href="index.php?page=profile&id=<?= $row['id'] ?>" class="nav-link nav-home text-dark">
                         <span class="nav-icon material-symbols-outlined">
                             person
                         </span>
@@ -42,7 +42,6 @@
                             <span class="nav-icon material-symbols-outlined">
                                 group
                             </span>
-
                             <p>
                                 Users
                                 <i class="right fas fa-angle-left"></i>
@@ -63,41 +62,47 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link nav-is-tree nav-edit_survey text-dark nav-view_survey">
-                            <span class="nav-icon material-symbols-outlined">
-                                quiz
-                            </span>
-                            <p>
-                                Survey
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="./index.php?page=new_survey" class="text-dark nav-link nav-new_survey tree-item">
-                                    <i class="fas fa-angle-right nav-icon"></i>
-                                    <p>Add New</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="./index.php?page=survey_list" class="text-dark nav-link nav-survey_list tree-item">
-                                    <i class="fas fa-angle-right nav-icon"></i>
-                                    <p>List</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a href="./index.php?page=survey_report" class="text-dark nav-link nav-survey_report">
-                            <span class="nav-icon material-symbols-outlined">
-                                monitoring
-                            </span>
-                            <p>
-                                Survey Report
-                            </p>
-                        </a>
-                    </li>
+                    <?php
+                    if (isset($_SESSION['login_type']) && $_SESSION['login_type'] == 1) {
+                    ?>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link nav-is-tree nav-edit_survey text-dark nav-view_survey">
+                                <span class="nav-icon material-symbols-outlined">
+                                    quiz
+                                </span>
+                                <p>
+                                    Survey
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="./index.php?page=new_survey" class="text-dark nav-link nav-new_survey tree-item">
+                                        <i class="fas fa-angle-right nav-icon"></i>
+                                        <p>Add New</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="./index.php?page=survey_list" class="text-dark nav-link nav-survey_list tree-item">
+                                        <i class="fas fa-angle-right nav-icon"></i>
+                                        <p>List</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="./index.php?page=survey_report" class="text-dark nav-link nav-survey_report">
+                                <span class="nav-icon material-symbols-outlined">
+                                    monitoring
+                                </span>
+                                <p>
+                                    Survey Report
+                                </p>
+                            </a>
+                        </li>
+                    <?php
+                    }
+                    ?>
                 <?php else : ?>
                     <li class="nav-item">
                         <a href="./index.php?page=survey_widget" class="text-dark nav-link nav-survey_widget nav-answer_survey">
@@ -143,3 +148,26 @@
         })
     })
 </script>
+
+<!-- <script>
+    var timeout = 10000;
+
+    function logoutRedirect() {
+        window.location.href = "ajax.php?action=logout";
+    }
+    var timeoutID;
+
+    function startTimer() {
+        timeoutID = setTimeout(logoutRedirect, timeout);
+    }
+
+    function resetTimer() {
+        clearTimeout(timeoutID);
+        startTimer();
+    }
+    document.addEventListener("DOMContentLoaded", function() {
+        startTimer();
+        document.addEventListener("mousemove", resetTimer);
+        document.addEventListener("keydown", resetTimer);
+    });
+</script> -->

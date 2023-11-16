@@ -1,5 +1,6 @@
 <?php include('db_connect.php') ?>
 <?php include('./header.php'); ?>
+
 <!-- Info boxes -->
 <!DOCTYPE html>
 <html lang="en">
@@ -14,7 +15,7 @@
 <body>
     <?php if ($_SESSION['login_type'] == 1) : ?>
         <h2> <b>Selamat datang di SIMPATI</b> </h2>
-        <p>SIMPATI merupakan singkatan dari Sistem Informasi Moniroing dan Evaluasi Pendidikan Tinggi</p>
+        <p>SIMPATI merupakan singkatan dari Sistem Informasi Monitoring dan Evaluasi Pendidikan Tinggi</p>
         <div class="row">
             <div class="col-lg-3 col-6">
                 <!-- small box -->
@@ -129,29 +130,32 @@
 
         </div>
     <?php else : ?>
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    Welcome <?php echo $_SESSION['login_name'] ?>!
-                </div>
-            </div>
-        </div>
+        <h2 class=" text-green text-bold">
+            Selamat datang <?php echo $_SESSION['login_name'] ?>! <br>
+        </h2>
+        <p class=" text-md text-lg">
+            SIMPATI - Sistem Informasi Monitoring dan Evaluasi Perguruan Tinggi <br>
+            SIMPATI UNUGHA merupakan sistem yang digunakan untuk merancang dan melaksanakan evaluasi manajemen pengelolaan
+            perguruan tinggi berbasis instrumen kuesioner atau survei. </p>
         <div class="row">
-            <div class="col-12 col-sm-6 col-md-3">
-                <div class="info-box">
-                    <span class="info-box-icon bg-primary elevation-1"><i class="fas fa-poll-h"></i></span>
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-light">
+                    <div class="inner">
+                        <h3>
+                            <?php echo $conn->query("SELECT distinct(survey_id) FROM answers  where user_id = {$_SESSION['login_id']}")->num_rows; ?><sup style="font-size: 20px"></sup>
+                        </h3>
 
-                    <div class="info-box-content">
-                        <span class="info-box-text">Total Surveys Taken</span>
-                        <span class="info-box-number">
-                            <?php echo $conn->query("SELECT distinct(survey_id) FROM answers  where user_id = {$_SESSION['login_id']}")->num_rows; ?>
-                        </span>
+                        <p>Total Survey Diisi</p>
                     </div>
-                    <!-- /.info-box-content -->
+                    <div class="icon">
+                        <i class="fas fa-poll-h"></i>
+                    </div>
+                    <a href="./index.php?page=survey_widget" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
-                <!-- /.info-box -->
             </div>
-            <!-- /.col -->
+            <!-- Ini Bekas Survey -->
+            <!-- End -->
         </div>
     <?php endif; ?>
 </body>

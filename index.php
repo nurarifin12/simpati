@@ -37,7 +37,7 @@ include 'header.php'
             <section class="content">
                 <div class="container-fluid">
                     <?php
-                    $page = isset($_GET['page']) ? $_GET['page'] : 'home';
+                    $page = isset($_GET['page']) ? $_GET['page'] : 'Dashboard';
                     include $page . '.php';
                     ?>
                 </div>
@@ -69,8 +69,7 @@ include 'header.php'
                         <div class="modal-body">
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" id='submit'
-                                onclick="$('#uni_modal form').submit()">Save</button>
+                            <button type="button" class="btn btn-primary" id='submit' onclick="$('#uni_modal form').submit()">Save</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                         </div>
                     </div>
@@ -93,8 +92,7 @@ include 'header.php'
             <div class="modal fade" id="viewer_modal" role='dialog'>
                 <div class="modal-dialog modal-md" role="document">
                     <div class="modal-content">
-                        <button type="button" class="btn-close" data-dismiss="modal"><span
-                                class="fa fa-times"></span></button>
+                        <button type="button" class="btn-close" data-dismiss="modal"><span class="fa fa-times"></span></button>
                         <img src="" alt="">
                     </div>
                 </div>
@@ -110,7 +108,7 @@ include 'header.php'
 
         <!-- Main Footer -->
         <footer class="main-footer text-center">
-            <strong>Copyright &copy; 2023 <a href="https://www.instagram.com/nurrifin07/">Arifin</a>.</strong>
+            <strong>Copyright &copy; 2023 <a href="https://nur-arifin-fe2830718.netlify.app/">Arifin</a>.</strong>
         </footer>
     </div>
     <!-- ./wrapper -->

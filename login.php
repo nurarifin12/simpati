@@ -8,53 +8,47 @@ include('./db_connect.php');
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>Login</title>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
 
 
     <?php include('./header.php'); ?>
     <?php
     if (isset($_SESSION['login_id']))
-        header("location:index.php?page=home");
-
+        header("location:index.php?page=Dashboard");
     ?>
 
 </head>
 <style>
-body {
-    width: 100%;
-    height: calc(100%);
-    position: fixed;
-    top: 0;
-    left: 0
-        /*background: #007bff;*/
-}
+    body {
+        width: 100%;
+        height: calc(100%);
+        position: fixed;
+        top: 0;
+        left: 0
+            /*background: #007bff;*/
+    }
 
-main#main {
-    width: 100%;
-    height: calc(100%);
-    display: flex;
-}
+    main#main {
+        width: 100%;
+        height: calc(100%);
+        display: flex;
+    }
 
-span {
-    color: blue;
-}
+    span {
+        color: blue;
+    }
 
-h3 {
-    font-family: Arial, Helvetica, sans-serif;
-}
+    h3 {
+        font-family: Arial, Helvetica, sans-serif;
+    }
 </style>
 
 <body>
-
-
     <main id="main" class="shadow-lg">
-
         <div class="align-self-center col-lg">
             <div id="login-center" class=" row justify-content-center">
                 <div class="card col-md-4 shadow-lg">
@@ -64,20 +58,19 @@ h3 {
                         <form id="login-form">
                             <div class="mb-3">
                                 <label for="email" class="control-label text-dark">Email address</label>
-                                <input type="text" class="form-control rounded-pill" id="email" name="email"
-                                    placeholder="Enter your email address..." aria-describedby="emailHelp">
+                                <input type="text" class="form-control rounded-pill" id="email" name="email" placeholder="Enter your email address..." aria-describedby="emailHelp">
                             </div>
                             <div class="mb-3">
                                 <label for="password" class="control-label text-dark">Password</label>
-                                <input type="password" class="form-control rounded-pill" id="password" name="password"
-                                    placeholder="Enter your password">
+                                <input type="password" class="form-control rounded-pill" id="password" name="password" placeholder="Enter your password">
                             </div>
                             <hr>
                             <button type="submit" class=" btn btn-block rounded-pill btn-primary">LOGIN</button>
                         </form>
                         <div class="text-center">
-                            <a class="small" href="">Forgot Password?</a>
+                            <a class="small" href="reset_password.php">Forgot Password?</a>
                         </div>
+
                         <div class="text-center">
                             <a class="small" href="./register.php">Create an
                                 Account!</a>
@@ -93,36 +86,36 @@ h3 {
 
 </body>
 <script>
-$('#login-form').submit(function(e) {
-    e.preventDefault()
-    $('#login-form button[type="button"]').attr('disabled', true).html('Logging in...');
-    if ($(this).find('.alert-danger').length > 0)
-        $(this).find('.alert-danger').remove();
-    $.ajax({
-        url: 'ajax.php?action=login',
-        method: 'POST',
-        data: $(this).serialize(),
-        error: err => {
-            console.log(err)
-            $('#login-form button[type="button"]').removeAttr('disabled').html('Login');
-
-        },
-        success: function(resp) {
-            if (resp == 1) {
-                location.href = 'index.php?page=home';
-            } else {
-                $('#login-form').prepend(
-                    '<div class="alert alert-danger">Username or password is incorrect.</div>')
+    $('#login-form').submit(function(e) {
+        e.preventDefault()
+        $('#login-form button[type="button"]').attr('disabled', true).html('Logging in...');
+        if ($(this).find('.alert-danger').length > 0)
+            $(this).find('.alert-danger').remove();
+        $.ajax({
+            url: 'ajax.php?action=login',
+            method: 'POST',
+            data: $(this).serialize(),
+            error: err => {
+                console.log(err)
                 $('#login-form button[type="button"]').removeAttr('disabled').html('Login');
+
+            },
+            success: function(resp) {
+                if (resp == 1) {
+                    location.href = 'index.php?page=Dashboard';
+                } else {
+                    $('#login-form').prepend(
+                        '<div class="alert alert-danger">Username or password is incorrect.</div>')
+                    $('#login-form button[type="button"]').removeAttr('disabled').html('Login');
+                }
             }
-        }
+        })
     })
-})
-$('.number').on('input', function() {
-    var val = $(this).val()
-    val = val.replace(/[^0-9 \,]/, '');
-    $(this).val(val)
-})
+    $('.number').on('input', function() {
+        var val = $(this).val()
+        val = val.replace(/[^0-9 \,]/, '');
+        $(this).val(val)
+    })
 </script>
 
 </html>

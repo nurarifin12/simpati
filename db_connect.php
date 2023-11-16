@@ -1,3 +1,3 @@
-<?php 
+<?php
 
-$conn= new mysqli('localhost','root','','survey_db')or die("Could not connect to mysql".mysqli_error($con));
+$conn = new mysqli('localhost', 'root', '', 'test_db') or die("Could not connect to mysql" . mysqli_error($con));
